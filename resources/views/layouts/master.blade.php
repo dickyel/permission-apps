@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vendor/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="../vendor/perfect-scrollbar/css/perfect-scrollbar.css">
-
+    <link href="{{ asset('vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" />
     @stack('cssLibrary')
 
     <link rel="stylesheet" href="../assets/css/style.min.css">
@@ -41,7 +42,13 @@
     </div>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+ 
 
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
     @stack('jsLibrary')
     <script src="../assets/js/main.min.js"></script>
     <script>
