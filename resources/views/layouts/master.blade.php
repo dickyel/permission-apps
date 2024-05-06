@@ -15,10 +15,14 @@
     <link rel="stylesheet" href="../vendor/perfect-scrollbar/css/perfect-scrollbar.css">
     <link href="{{ asset('vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('/assets/css/loading.css') }}">
+
     @stack('cssLibrary')
 
-    <link rel="stylesheet" href="../assets/css/style.min.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap-override.min.css">
+    <link rel="stylesheet" href="{{ asset('./assets/css/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/css/bootstrap-override.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/css/loading.css') }}">
+    
     <link rel="stylesheet" id="theme-color" href="../assets/css/dark.min.css">
 
     @stack('css')
@@ -28,7 +32,11 @@
     <div id="app">
         <div class="shadow-header"></div>
         @include('layouts.header')
-        @include('layouts.sidebar')   
+        @include('layouts.sidebar')
+        
+        <div class="modal fade" id="modal_action" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
+          
+        </div>
 
         {{ $slot }}
         
@@ -38,6 +46,12 @@
             Copyright © 2022 &nbsp <a href="https://www.youtube.com/c/mulaidarinull" target="_blank" class="ml-1"> Mulai Dari Null </a> <span> . All rights Reserved</span>
         </footer>
         <div class="overlay action-toggle">
+        </div>
+
+        <!-- loader -->
+
+        <div class="preloader" style="visibility:hidden;">
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
         </div>
     </div>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
@@ -53,6 +67,48 @@
     <script src="../assets/js/main.min.js"></script>
     <script>
         Main.init()
+
+        showLoading()
+        $(document).ready(function() {
+            showLoading(false)
+        })
+
+        function showLoading(show = true) {
+            const preloader = $(".preloader");
+
+            if (show) {
+                preloader.css({
+                    opacity: 1,
+                    visibility: "visible",
+                });
+            } else {
+                preloader.css({
+                    opacity: 0,
+                    visibility: "hidden",
+                });
+            }
+        }
+
+    function submitLoader(formId = '#form_action') {
+        const button = $(formId).find('button[type="submit"]');
+        const originalHtml = button.html();
+
+        function show() {
+            button.addClass("btn-load").attr("disabled", true).html(
+                `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+            );
+        }
+
+        function hide() {
+            button.removeClass("btn-load").removeAttr("disabled").html(originalHtml);
+        }
+
+        return {
+            show,
+            hide
+        };
+    }
+
     </script>
 
     @stack('js')

@@ -22,7 +22,10 @@ class MenuDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'menu.action')
+            ->addColumn('action', function($row) {
+                $actions['Edit'] = route('konfigurasi.menu.edit', $row->id);
+                return view('action', compact('actions'));
+            })
             ->setRowId('id');
     }
 
