@@ -57,10 +57,12 @@
                             contentType: false,
                             processData: false,
                             beforeSend: function() {
-                                $(_form).find('.is-invalid').removeClass('is-invalid');
-                                $(_form).find('.invalid-feedback').remove();
+                                // Hapus pesan kesalahan sebelum mengirimkan permintaan
+                                $('.is-invalid').removeClass('is-invalid');
+                                $('.invalid-feedback').remove();
                                 submitLoader().show();
                             },
+
                             success: (res) => {
                                 if (this.runDefaultSuccessCallback) {
                                     $('#modal_action').modal('hide');
@@ -85,6 +87,7 @@
                                     }
                                 }
                             }
+
                         });
                     });
                 }
